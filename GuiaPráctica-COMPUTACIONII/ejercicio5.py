@@ -1,3 +1,6 @@
+"""Realice otro programa que genere la siguiente configuración de procesos, y cada
+proceso al iniciar deberá mostrar “Soy el proceso N, mi padre es M” N será el PID de
+cada hijo, y M el PID del padre."""
 import os
 import multiprocessing
 from multiprocessing import Process
