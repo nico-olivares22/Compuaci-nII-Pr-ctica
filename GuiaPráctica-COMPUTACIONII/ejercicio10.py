@@ -3,8 +3,24 @@ import os,sys,time,signal
 def handler(signum,frame):
     return
 
+def hijo(w, r):
+    signal.pause()
+    os.close(r)
+    w = os.fdopen(w,'w')
+    w.write("Mensaje Hijo PID:%s \n"%os.getpid())
+    w.close()
+
+def nieto(w, r):
+    signal.pause()
+    os.close(r)
+    w = os.fdopen(w, 'w')
+    w.write("Mensaje Nieto PID:%s \n"%os.getpid())
+    w.close()
+
+
+pidAbuelo = os.getpid()
+
 signal.signal(signal.SIGUSR1,handler)
-signal.signal(signal.SIGUSR2,handler)
 
 def f2():
     r, w = os.pipe()
@@ -13,35 +29,29 @@ def f2():
     pB = os.fork()
 
     if pB==0:
-        signal.pause()
-        print("Mostrando los mensajes almacenados en la tubería:")
-        print("Proceso hijo -B-")
-        os.close(r)
-        w = os.fdopen(w,'w')
-        w.write("Mensaje1 PID:%s \n"%os.getpid())
-        w.flush()
-        time.sleep(1)
         pC = os.fork()
-        os.kill(pC,signal.SIGUSR1)
-
         if pC==0:
-            signal.pause()
-            print("Proceso hijo -C-")
-            w.write("Mensaje2 PID:%s \n"%os.getpid())
-            w.close()
+            nieto(w, r)
+            os.kill(pidAbuelo, signal.SIGUSR1)
+            os._exit(0)
+        else:
+            hijo(w, r)
+            time.sleep(0.001)
+            os.kill(pC, signal.SIGUSR1)
+            os.wait()
+            os._exit(0)
+    else:
+        time.sleep(0.001)
+        os.kill(pB,signal.SIGUSR1)
+        signal.pause()
+        os.close(w)
+        r = os.fdopen(r, 'r')
+        print("Padre (PID=%d) leyendo de la tuberia: \n" % os.getpid())
+        linea = r.readline()
+        while linea:
+            print(linea)
+            linea = r.readline()
+        r.close
+        os.wait()
 
-            os.kill(pB,signal.SIGUSR1)
-            time.sleep(1)
-            sys.exit(0)
-
-    time.sleep(1)
-    os.kill(pB,signal.SIGUSR1)
-
-    signal.pause()
-    r = os.fdopen(r,'r')
-
-    for line in r:
-        print("%s" % line)
-    r.close()
-    print("Cerrando extremo")
 f2()
