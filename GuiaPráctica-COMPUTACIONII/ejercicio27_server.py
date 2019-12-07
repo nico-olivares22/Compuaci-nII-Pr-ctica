@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 import socket, os, multiprocessing, sys
 
 def mp_server(sock):
@@ -8,15 +8,13 @@ def mp_server(sock):
         print("Recibido: %s" % msg.decode())
         if not msg:
             break
-        #clientsocket.close()
 
 
 
-# create a socket object
+
+# creamos un objeto de tipo socket
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# get local machine name
-#host = socket.gethostname()
 host = ""
 port = int(sys.argv[1])
 
@@ -27,7 +25,7 @@ serversocket.bind((host, port))
 serversocket.listen(5)
 
 while True:
-    # establish a connection
+    #se establece conexión
     clientsocket,addr = serversocket.accept()
 
     print("Got a connection from %s" % str(addr))

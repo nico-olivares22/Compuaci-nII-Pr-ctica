@@ -20,10 +20,9 @@ import socket, sys, os, time
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-except socket.error:
+except socket.error: #si algo de arriba anduvo mal muestra el error del socket
     print ('Fallo al crear el socket!')
     sys.exit()
-
 print ('Socket Creado!')
 
 host = str(sys.argv[1])
@@ -35,7 +34,7 @@ print ('Socket conectado al host', host, 'en el puerto', port)
 
 while True:
     msg = input('Ingrese msg: ').encode()
-    if msg.decode() == 'exit':
+    if msg.decode() == 'exit': #con exit sale del while y termina con la ejecución del programa 
         break
     else:
         try :

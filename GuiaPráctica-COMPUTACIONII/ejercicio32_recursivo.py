@@ -10,6 +10,7 @@ Así, un ejemplo de ejecución sería el siguiente:
 De este ejercicio se deben escribir dos versiones, una que utilice el algoritmo recursivo
 para calcular la serie de Fibonacci, y otra que utilice el algoritmo iterativo.
 """
+#función recursiva 
 from concurrent.futures import ProcessPoolExecutor
 import sys
 import getopt

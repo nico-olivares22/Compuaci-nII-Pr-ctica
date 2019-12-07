@@ -9,7 +9,7 @@ import os
 import multiprocessing
 
 def thread_function(x,l,q):
-    l.acquire()
+    l.acquire() 
     time.sleep(x)
     q.put("mi PID es: %d,Nombre: %s, Thread %d,Proceso: %d"%(os.getpid(),threading.current_thread().getName(),threading.get_ident(),x))
     l.release()
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     q = Queue()
     l = Lock()
 
-    p=[]
+    p=[] #lista que luego va ser llena
     for x in range(10):
         p.append(threading.Thread(target=thread_function, args=(x,l,q)))
         p[x].start()

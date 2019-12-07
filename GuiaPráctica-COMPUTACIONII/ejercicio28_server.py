@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+
 import socket, os, threading, sys
 
 def th_server(sock):
@@ -10,7 +10,7 @@ def th_server(sock):
             break
 #    sock.close()
 
-# create a socket object
+# creamos un objeto de tipo socket
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # get local machine name

@@ -39,7 +39,7 @@ if __name__=="__main__":
     except FileNotFoundError as e:
         file=open(nombre_archivo,'a')
         file.close()
-    lista=[]
+    lista=[] #lista que va ser llenada 
     for i in range(15):
         letra=letras[i]
         lista.append(threading.Thread(target=f,args=(lock,nombre_archivo,cant_iteraciones,letra)))

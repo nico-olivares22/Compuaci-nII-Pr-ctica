@@ -1,27 +1,24 @@
 import sys
 import time
 import os
-import multiprocessing
 from multiprocessing import Process, Pipe
 
 
 def lector(conn):
+    while True:
+        print(f"\nLeyendo', '(PID:{os.getpid()} )': {conn.recv()}")
 
-    print("Segundo proceso hijo PID:", os.getpid())
-    print("Imprimiendo los mensajes escritos en el pipe.")
-    print(lector_conn.recv())
-    print("----------------------------------------")
 
 
 def escritor(conn):
     print("Primer proceso hijo PID:", os.getpid())
-    #for line in sys.stdin:
-        #print(line)
-    line="Este mensaje fue predefinido hasta encontrar la solucion ..."
-    print("El mensaje fue escrito!")
-    print("----------------------------------------")
-    conn.send(line)
-    conn.close()
+    sys.stdin = open(0)
+    while True:
+        print('Ingrese una linea: ')
+        c = sys.stdin.readline()
+        conn.send(c)
+        time.sleep(.3)
+
 
 
 if __name__ == "__main__":
@@ -31,10 +28,8 @@ if __name__ == "__main__":
 
     time.sleep(1)
     p1 = Process(target=escritor, args=(escritor_conn,))
-    p1.start()
-    time.sleep(4)
-    p1.join()
     p2 = Process(target=lector, args=(lector_conn,))
+    p1.start()
     p2.start()
-    time.sleep(3)
+    p1.join()
     p2.join()

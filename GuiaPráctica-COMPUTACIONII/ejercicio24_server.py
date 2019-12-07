@@ -18,7 +18,7 @@ for (op,ar) in opt:
     else:
         print('Opcion incorrecta!')
 
-#create a socket object
+#creamos un objeto de tipo socket
 serversocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 
 host = ""

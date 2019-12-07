@@ -53,7 +53,7 @@ if __name__=="__main__":
             aux.truncate() #Borramos el contenido del archivo solo si este fue escrito anteriormente
         aux.close()
     except FileNotFoundError as e:
-        file=open(nombre_archivo,'a')
+        file=open(nombre_archivo,'a') #abrimos archivo
         file.close()
     lista=[]
     for i in range(15):

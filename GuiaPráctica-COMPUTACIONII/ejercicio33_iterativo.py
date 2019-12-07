@@ -4,6 +4,7 @@ Reescriba el programa anterior para ejecutarlo con hilos concurrentes mediante
 ThreadPoolExecutor. Al igual que el ejercicio anterior, escribir una versión que utilice el
 algoritmo recursivo y otra haciendo uso del algoritmo iterativo.
 """
+#función iterativa 
 from concurrent.futures import ThreadPoolExecutor
 import sys
 import getopt

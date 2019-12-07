@@ -1,9 +1,9 @@
-#!/usr/bin/python3
+
 import sys
 import socket
 import os
 
-# create a socket object
+# creamos un objeto de tipo socket
 try:
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 except socket.error:
