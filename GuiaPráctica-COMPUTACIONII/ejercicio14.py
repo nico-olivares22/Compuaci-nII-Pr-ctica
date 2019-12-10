@@ -1,3 +1,5 @@
+"""Ejercicio 14 – Multiprocessing / Pipe
+Replicar el comportamiento del ejercicio 11 utilizando el módulo Multiprocessing."""
 import sys
 import time
 import os
